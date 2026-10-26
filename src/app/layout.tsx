@@ -53,7 +53,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="zh-CN"
-      data-theme="paper"
       suppressHydrationWarning
       className={`${fraunces.variable} ${outfit.variable} ${geistMono.variable} h-full antialiased`}
     >

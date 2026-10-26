@@ -1,6 +1,6 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
+import { useLayoutEffect, useSyncExternalStore } from "react";
 import { Button } from "@/components/ui/button";
 
 type Theme = "paper" | "dusk";
@@ -22,15 +22,25 @@ function getServerSnapshot(): Theme {
   return "paper";
 }
 
+function applyTheme(theme: Theme) {
+  document.documentElement.dataset.theme = theme;
+  const meta = document.querySelector('meta[name="theme-color"]');
+  meta?.setAttribute("content", theme === "dusk" ? "#141311" : "#f4efe6");
+}
+
 export function ThemeToggle() {
   const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
+  useLayoutEffect(() => {
+    const stored = localStorage.getItem("vesper-theme");
+    if (stored === "dusk" || stored === "paper") applyTheme(stored);
+  }, []);
+
   const toggle = () => {
-    const next: Theme = theme === "dusk" ? "paper" : "dusk";
-    document.documentElement.dataset.theme = next;
+    const current = document.documentElement.dataset.theme === "dusk" ? "dusk" : "paper";
+    const next: Theme = current === "dusk" ? "paper" : "dusk";
     localStorage.setItem("vesper-theme", next);
-    const meta = document.querySelector('meta[name="theme-color"]');
-    meta?.setAttribute("content", next === "dusk" ? "#141311" : "#f4efe6");
+    applyTheme(next);
   };
 
   return (

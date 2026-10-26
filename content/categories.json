@@ -1,0 +1,20 @@
+[
+  {
+    "slug": "notes",
+    "name": "随笔",
+    "seal": "笔",
+    "description": "没有目的地的想法，写完就可以放下。"
+  },
+  {
+    "slug": "signal",
+    "name": "信号",
+    "seal": "讯",
+    "description": "和模型、工具相处时留下的记录。"
+  },
+  {
+    "slug": "days",
+    "name": "日常",
+    "seal": "日",
+    "description": "日子本身。慢一点，也值得记一笔。"
+  }
+]
